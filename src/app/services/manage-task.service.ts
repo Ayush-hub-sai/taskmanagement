@@ -14,6 +14,8 @@ export class ManageTaskService {
   }
 
   saveTasks(item: Task): void {
+    console.log(item);
+    console.log(this.lastElementId);
     this.lastElementId++;
     item.id = this.lastElementId;
     this.tasks.push(item);
