@@ -1,0 +1,75 @@
+<div class="header bg-gradient-danger pt-0 pt-md-0" style="padding-bottom: 60px;">
+  <div class="container-fluid">
+    <div class="header-body"></div>
+  </div>
+</div>
+
+<div class="container-fluid" style="margin-top: -60px;">
+  <div class="row">
+    <div class="col-12">
+      <div class="card shadow">
+        <div class="card-header border-0 d-flex flex-wrap justify-content-between align-items-center">
+          <h3 class="panel-title mb-0">
+            <span class="align-text-top">Task List</span>
+          </h3>
+          <span class="pull-right">
+            <button type="button" class="btn btn-primary" (click)="navigateToAddTask()">
+              Add Task
+            </button>
+          </span>
+        </div>
+        <div class="table-responsive  text-center px-2">
+          <table class="table table-striped table-sm table-hover table-bordered">
+            <thead class="table-light">
+              <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Due Date</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let task of tasks;let i=index">
+                <td>{{ task.title }}</td>
+                <td>{{ task.description }}</td>
+                <td>{{ task.dueDate | date }}</td>
+                <td>
+                  <div class="d-inline-block ml-2" style="width: 100px;">
+                    <span *ngIf="task.status === 'Active'">
+                      <button class="btn btn-link" (click)="toggleStatus(task)" data-toggle="tooltip"
+                        data-placement="top" title="Active">
+                        <i class="fa fa-toggle-on" aria-hidden="true"></i>
+                      </button>
+                    </span>
+                    <span *ngIf="task.status !== 'Active'">
+                      <button class="btn btn-link" (click)="toggleStatus(task)" data-toggle="tooltip"
+                        data-placement="top" title="Completed">
+                        <i class="fa fa-toggle-off" aria-hidden="true"></i>
+                      </button>
+                    </span>
+                  </div>
+                </td>
+
+                <td>
+                  <button type="button" class="btn btn-sm btn-danger" (click)="deleteTask(i)"><i
+                      class="fa fa-minus"></i></button>&nbsp;
+                  <button type="button" class="btn btn-sm btn-warning" (click)="viewTask(task)"><i
+                      class="fa fa-eye"></i></button>&nbsp;
+                  <button type="button" class="btn btn-sm btn-info" (click)="updateTask(task)"> <i
+                      class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  </button>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+
+          <div *ngIf="tasks.length == 0" class="text-center">
+            <h3 class="text-muted">No record found.</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
